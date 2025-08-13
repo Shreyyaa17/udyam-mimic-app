@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ctl00_ContentPlaceHolder1_txtadharno",
+    "label": "1. Aadhaar Number/ आधार संख्या",
+    "type": "text",
+    "required": false,
+    "pattern": null,
+    "maxlength": 12,
+    "options": null
+  },
+  {
+    "id": "ctl00_ContentPlaceHolder1_txtownername",
+    "label": "2. Name of Entrepreneur / उद्यमी का नाम",
+    "type": "text",
+    "required": false,
+    "pattern": null,
+    "maxlength": 100,
+    "options": null
+  },
+  {
+    "id": "ctl00_ContentPlaceHolder1_chkDecarationA",
+    "label": "ctl00_ContentPlaceHolder1_chkDecarationA",
+    "type": "checkbox",
+    "required": false,
+    "pattern": null,
+    "maxlength": null,
+    "options": null
+  },
+  {
+    "id": "checkbox",
+    "label": "",
+    "type": "checkbox",
+    "required": false,
+    "pattern": null,
+    "maxlength": null,
+    "options": null
+  }
+]

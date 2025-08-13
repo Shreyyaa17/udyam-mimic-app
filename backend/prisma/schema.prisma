@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Clean up - only keep the main applicants model that your backend uses
+model applicants {
+  id                     Int      @id @default(autoincrement())
+  aadhaar                String   @unique
+  entrepreneur_name      String
+  otp_aadhaar           String
+  pincode               String
+  city                  String
+  state                 String
+  organisation_type     String
+  pan                   String   @unique
+  pan_name              String
+  pan_dob               String
+  itr_filed             Boolean
+  gstin_available       Boolean
+  mobile                String
+  email                 String
+  social_category       String
+  gender                String
+  physically_handicapped Boolean
+  enterprise_name       String
+  plant_location        String
+  bank_account          String
+  ifsc                  String
+  created_at            DateTime @default(now())
+  updated_at            DateTime @default(now()) @updatedAt  // ✅ Added default value
+}

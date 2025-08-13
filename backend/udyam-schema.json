@@ -1,0 +1,270 @@
+[
+  {
+    "step": 1,
+    "id": "aadhaar",
+    "label": "Aadhaar Number / आधार संख्या",
+    "type": "text",
+    "required": true,
+    "pattern": "^[0-9]{12}$",
+    "hint": "Enter 12-digit Aadhaar Number"
+  },
+  {
+    "step": 1,
+    "id": "entrepreneur_name",
+    "label": "Name of Entrepreneur / उद्यमी का नाम",
+    "type": "text",
+    "required": true
+  },
+  {
+    "step": 2,
+    "id": "otp_aadhaar",
+    "label": "OTP (sent to Aadhaar registered mobile) / OTP (आधार पंजीकृत मोबाइल पर भेजा गया)",
+    "type": "text",
+    "required": true,
+    "pattern": "^[0-9]{6}$",
+    "hint": "Enter 6-digit OTP"
+  },
+  {
+    "step": 2,
+    "id": "pincode",
+    "label": "PIN Code",
+    "type": "text",
+    "required": true,
+    "pattern": "^[0-9]{6}$",
+    "maxlength": 6,
+    "hint": "Enter 6-digit PIN code"
+  },
+  {
+    "step": 2,
+    "id": "city",
+    "label": "City",
+    "type": "text",
+    "required": true,
+    "maxlength": 100,
+    "hint": "Auto-filled from PIN"
+  },
+  {
+    "step": 2,
+    "id": "state",
+    "label": "State",
+    "type": "text",
+    "required": true,
+    "maxlength": 100,
+    "hint": "Auto-filled from PIN"
+  },
+  {
+    "step": 3,
+    "id": "organisation_type",
+    "label": "Type of Organisation / संगठन के प्रकार",
+    "type": "select",
+    "required": true,
+    "options": [
+      {
+        "value": "proprietorship",
+        "text": "Proprietorship"
+      },
+      {
+        "value": "partnership",
+        "text": "Partnership"
+      },
+      {
+        "value": "pvt_ltd",
+        "text": "Private Limited Company"
+      },
+      {
+        "value": "public_ltd",
+        "text": "Public Limited Company"
+      },
+      {
+        "value": "llp",
+        "text": "LLP"
+      },
+      {
+        "value": "cooperative",
+        "text": "Co-operative Society"
+      },
+      {
+        "value": "society",
+        "text": "Society"
+      },
+      {
+        "value": "trust",
+        "text": "Trust"
+      },
+      {
+        "value": "others",
+        "text": "Others"
+      }
+    ]
+  },
+  {
+    "step": 4,
+    "id": "pan",
+    "label": "PAN / पैन",
+    "type": "text",
+    "required": true,
+    "pattern": "^[A-Z]{5}[0-9]{4}[A-Z]{1}$",
+    "hint": "Enter valid PAN (e.g., ABCDE1234F)"
+  },
+  {
+    "step": 4,
+    "id": "pan_name",
+    "label": "Name of PAN Holder / पैन धारक का नाम",
+    "type": "text",
+    "required": true
+  },
+  {
+    "step": 4,
+    "id": "pan_dob",
+    "label": "DOB or DOI as per PAN / पैन के अनुसार जन्म तिथि या निगमन तिथि",
+    "type": "date",
+    "required": true
+  },
+  {
+    "step": 5,
+    "id": "itr_filed",
+    "label": "Whether ITR Filed in last year / क्या पिछले वर्ष में आईटीआर दायर किया गया है?",
+    "type": "select",
+    "required": true,
+    "options": [
+      {
+        "value": "yes",
+        "text": "Yes"
+      },
+      {
+        "value": "no",
+        "text": "No"
+      }
+    ]
+  },
+  {
+    "step": 5,
+    "id": "gstin_available",
+    "label": "Whether GSTIN Available / क्या जीएसटीआईएन उपलब्ध है?",
+    "type": "select",
+    "required": true,
+    "options": [
+      {
+        "value": "yes",
+        "text": "Yes"
+      },
+      {
+        "value": "no",
+        "text": "No"
+      }
+    ]
+  },
+  {
+    "step": 5,
+    "id": "mobile",
+    "label": "Mobile Number / मोबाइल नंबर",
+    "type": "text",
+    "required": true,
+    "pattern": "^[6-9][0-9]{9}$",
+    "hint": "Enter 10-digit mobile number"
+  },
+  {
+    "step": 5,
+    "id": "email",
+    "label": "Email ID / ईमेल आईडी",
+    "type": "text",
+    "required": true,
+    "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+    "hint": "Enter valid email address"
+  },
+  {
+    "step": 5,
+    "id": "social_category",
+    "label": "Social Category / सामाजिक श्रेणी",
+    "type": "select",
+    "required": true,
+    "options": [
+      {
+        "value": "general",
+        "text": "General"
+      },
+      {
+        "value": "sc",
+        "text": "SC"
+      },
+      {
+        "value": "st",
+        "text": "ST"
+      },
+      {
+        "value": "obc",
+        "text": "OBC"
+      }
+    ]
+  },
+  {
+    "step": 5,
+    "id": "gender",
+    "label": "Gender / लिंग",
+    "type": "select",
+    "required": true,
+    "options": [
+      {
+        "value": "male",
+        "text": "Male"
+      },
+      {
+        "value": "female",
+        "text": "Female"
+      },
+      {
+        "value": "other",
+        "text": "Other"
+      }
+    ]
+  },
+  {
+    "step": 5,
+    "id": "physically_handicapped",
+    "label": "Physically Handicapped / शारीरिक रूप से विकलांग",
+    "type": "select",
+    "required": true,
+    "options": [
+      {
+        "value": "yes",
+        "text": "Yes"
+      },
+      {
+        "value": "no",
+        "text": "No"
+      }
+    ]
+  },
+  {
+    "step": 6,
+    "id": "enterprise_name",
+    "label": "Enterprise Name / उद्यम का नाम",
+    "type": "text",
+    "required": true
+  },
+  {
+    "step": 6,
+    "id": "plant_location",
+    "label": "Plant Location / संयंत्र का स्थान",
+    "type": "text",
+    "required": true
+  },
+  {
+    "step": 6,
+    "id": "bank_account",
+    "label": "Bank Account Number / बैंक खाता संख्या",
+    "type": "text",
+    "required": true,
+    "pattern": "^[0-9]{9,18}$",
+    "hint": "Enter valid account number"
+  },
+  {
+    "step": 6,
+    "id": "ifsc",
+    "label": "IFSC Code / आईएफएससी कोड",
+    "type": "text",
+    "required": true,
+    "pattern": "^[A-Z]{4}0[A-Z0-9]{6}$",
+    "hint": "Enter valid IFSC (e.g., SBIN0001234)"
+  }
+]
