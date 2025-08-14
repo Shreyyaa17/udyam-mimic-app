@@ -7,27 +7,33 @@ export class FormController {
   // Submit Udyam registration
   static async submitUdyamRegistration(req: Request, res: Response) {
     try {
+      console.log("Received request body:", JSON.stringify(req.body, null, 2));
+      console.log("Request headers:", req.headers["content-type"]);
+
+      // Just to check
+      console.log("Received data:", JSON.stringify(req.body, null, 2));
       console.log(
-        "📥 Received request body:",
-        JSON.stringify(req.body, null, 2)
+        "Data types:",
+        Object.entries(req.body).map(
+          ([key, value]) => `${key}: ${typeof value}`
+        )
       );
-      console.log("📥 Request headers:", req.headers["content-type"]);
 
       // Validate the incoming data
       const validatedData = udyamRegistrationSchema.parse(req.body);
-      console.log("✅ Data validation successful:", validatedData);
+      console.log("Data validation successful:", validatedData);
 
       // Check if Aadhaar already exists
       const existingApplication = await FormService.findByAadhaar(
         validatedData.aadhaar
       );
       console.log(
-        "🔍 Existing application check:",
+        "Existing application check:",
         existingApplication ? "Found duplicate" : "No duplicate found"
       );
 
       if (existingApplication) {
-        console.log("⚠️ Duplicate Aadhaar found for:", validatedData.aadhaar);
+        console.log("Duplicate Aadhaar found for:", validatedData.aadhaar);
         return res.status(400).json({
           success: false,
           message: "Aadhaar number already registered",
@@ -35,9 +41,9 @@ export class FormController {
       }
 
       // Create new registration
-      console.log("💾 Creating new application...");
+      console.log("Creating new application...");
       const newApplication = await FormService.createApplication(validatedData);
-      console.log("✅ Application created successfully:", newApplication.id);
+      console.log("Application created successfully:", newApplication.id);
 
       const udyamId = `UDYAM-${String(newApplication.id).padStart(8, "0")}`;
 
@@ -48,13 +54,13 @@ export class FormController {
         udyam_id: udyamId,
       });
     } catch (error: any) {
-      console.error("❌ FULL ERROR DETAILS:");
+      console.error("FULL ERROR DETAILS:");
       console.error("Error name:", error.name);
       console.error("Error message:", error.message);
       console.error("Error stack:", error.stack);
 
       if (error.name === "ZodError") {
-        console.error("📋 Validation errors:", error.errors);
+        console.error("Validation errors:", error.errors);
         return res.status(400).json({
           success: false,
           message: "Validation failed",
@@ -68,7 +74,7 @@ export class FormController {
 
       // Handle Prisma unique constraint violations
       if (error.code === "P2002") {
-        console.error("🔒 Unique constraint violation:", error.meta);
+        console.error("Unique constraint violation:", error.meta);
         return res.status(400).json({
           success: false,
           message: "Duplicate entry detected",
@@ -78,7 +84,7 @@ export class FormController {
 
       // Handle other Prisma errors
       if (error.code?.startsWith("P")) {
-        console.error("🗄️ Prisma error:", error.code, error.message);
+        console.error("Prisma error:", error.code, error.message);
         return res.status(500).json({
           success: false,
           message: "Database error occurred",
@@ -97,7 +103,7 @@ export class FormController {
   // Get all applications
   static async getAllApplications(req: Request, res: Response) {
     try {
-      console.log("📋 Fetching all applications...");
+      console.log("Fetching all applications...");
 
       // Optional: Add pagination parameters
       const page = parseInt(req.query.page as string) || 1;
@@ -108,7 +114,7 @@ export class FormController {
       const total = await FormService.getApplicationsCount();
 
       console.log(
-        `✅ Fetched ${
+        `Fetched ${
           applications.length
         } applications (page ${page} of ${Math.ceil(total / limit)})`
       );
@@ -128,7 +134,7 @@ export class FormController {
         count: applications.length,
       });
     } catch (error: any) {
-      console.error("❌ Error fetching applications:", error);
+      console.error("Error fetching applications:", error);
       res.status(500).json({
         success: false,
         message: "Failed to fetch applications",
@@ -151,19 +157,19 @@ export class FormController {
         });
       }
 
-      console.log(`🔍 Fetching application with ID: ${applicationId}`);
+      console.log(`Fetching application with ID: ${applicationId}`);
 
       const application = await FormService.findById(applicationId);
 
       if (!application) {
-        console.log(`❌ Application not found: ${applicationId}`);
+        console.log(`Application not found: ${applicationId}`);
         return res.status(404).json({
           success: false,
           message: "Application not found",
         });
       }
 
-      console.log(`✅ Application found: ${application.enterprise_name}`);
+      console.log(`Application found: ${application.enterprise_name}`);
 
       res.status(200).json({
         success: true,
@@ -173,7 +179,7 @@ export class FormController {
         },
       });
     } catch (error: any) {
-      console.error("❌ Error fetching application:", error);
+      console.error("Error fetching application:", error);
       res.status(500).json({
         success: false,
         message: "Failed to fetch application",
@@ -204,9 +210,7 @@ export class FormController {
         });
       }
 
-      console.log(
-        `🔄 Updating application ${applicationId} status to: ${status}`
-      );
+      console.log(`Updating application ${applicationId} status to: ${status}`);
 
       // Check if application exists
       const existingApplication = await FormService.findById(applicationId);
@@ -222,9 +226,7 @@ export class FormController {
         status
       );
 
-      console.log(
-        `✅ Application status updated successfully: ${applicationId}`
-      );
+      console.log(`Application status updated successfully: ${applicationId}`);
 
       res.status(200).json({
         success: true,
@@ -235,7 +237,7 @@ export class FormController {
         },
       });
     } catch (error: any) {
-      console.error("❌ Error updating application:", error);
+      console.error("Error updating application:", error);
       res.status(500).json({
         success: false,
         message: "Failed to update application status",
@@ -258,7 +260,7 @@ export class FormController {
         });
       }
 
-      console.log(`🗑️ Deleting application: ${applicationId}`);
+      console.log(`Deleting application: ${applicationId}`);
 
       // Check if application exists
       const existingApplication = await FormService.findById(applicationId);
@@ -271,14 +273,14 @@ export class FormController {
 
       await FormService.deleteApplication(applicationId);
 
-      console.log(`✅ Application deleted successfully: ${applicationId}`);
+      console.log(`Application deleted successfully: ${applicationId}`);
 
       res.status(200).json({
         success: true,
         message: "Application deleted successfully",
       });
     } catch (error: any) {
-      console.error("❌ Error deleting application:", error);
+      console.error("Error deleting application:", error);
       res.status(500).json({
         success: false,
         message: "Failed to delete application",
@@ -291,7 +293,7 @@ export class FormController {
   // Get application statistics (optional - for dashboard)
   static async getApplicationStats(req: Request, res: Response) {
     try {
-      console.log("📊 Fetching application statistics...");
+      console.log("Fetching application statistics...");
 
       const stats = await FormService.getApplicationStats();
 
@@ -300,7 +302,7 @@ export class FormController {
         data: stats,
       });
     } catch (error: any) {
-      console.error("❌ Error fetching statistics:", error);
+      console.error("Error fetching statistics:", error);
       res.status(500).json({
         success: false,
         message: "Failed to fetch statistics",
@@ -322,7 +324,7 @@ export class FormController {
         limit = 10,
       } = req.query;
 
-      console.log("🔍 Searching applications with filters:", req.query);
+      console.log("Searching applications with filters:", req.query);
 
       const searchCriteria = {
         enterprise_name: enterprise_name as string,
@@ -355,7 +357,7 @@ export class FormController {
         count: applications.length,
       });
     } catch (error: any) {
-      console.error("❌ Error searching applications:", error);
+      console.error("Error searching applications:", error);
       res.status(500).json({
         success: false,
         message: "Failed to search applications",

@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 // Request logging
 app.use((req, res, next) => {
-  console.log(`📥 ${req.method} ${req.path}`);
+  console.log(`${req.method} ${req.path}`);
   next();
 });
 
@@ -74,7 +74,7 @@ app.use(
     res: express.Response,
     next: express.NextFunction
   ) => {
-    console.error("🚨 Global error:", err.message);
+    console.error("Global error:", err.message);
     res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -86,7 +86,7 @@ app.use(
   }
 );
 
-// ✅ FIXED: 404 handler using simple middleware (NO WILDCARDS)
+// FIXED: 404 handler using simple middleware (NO WILDCARDS)
 app.use((req: express.Request, res: express.Response) => {
   res.status(404).json({
     success: false,
@@ -99,14 +99,14 @@ app.use((req: express.Request, res: express.Response) => {
 const startServer = async () => {
   try {
     app.listen(PORT, () => {
-      console.log(`🚀 Server running on http://localhost:${PORT}`);
-      console.log(`🌐 Health check: http://localhost:${PORT}/health`);
-      console.log(`🧪 Test API: http://localhost:${PORT}/api/test`);
+      console.log(`Server running on http://localhost:${PORT}`);
+      console.log(`Health check: http://localhost:${PORT}/health`);
+      console.log(`Test API: http://localhost:${PORT}/api/test`);
     });
 
     await DatabaseUtils.testConnection();
   } catch (error) {
-    console.error("❌ Failed to start server:", error);
+    console.error("Failed to start server:", error);
     process.exit(1);
   }
 };

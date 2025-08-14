@@ -50,7 +50,7 @@ describe("Udyam Registration Validation", () => {
     test("should trigger validation error for invalid PAN in schema", () => {
       const invalidData = { ...validData, pan: "INVALID_PAN" };
 
-      // ✅ FIX: Proper error handling with type assertion
+      // FIX: Proper error handling with type assertion
       let caughtError: ZodError | null = null;
       try {
         udyamRegistrationSchema.parse(invalidData);
@@ -179,7 +179,7 @@ describe("Udyam Registration Validation", () => {
         email: "invalid-email",
       };
 
-      // ✅ FIX: Proper error handling with type guard
+      // FIX: Proper error handling with type guard
       let caughtError: ZodError | null = null;
       try {
         udyamRegistrationSchema.parse(multipleInvalidData);

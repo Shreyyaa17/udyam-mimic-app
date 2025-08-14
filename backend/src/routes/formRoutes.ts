@@ -1,28 +1,10 @@
-// import express from 'express'
-// import { FormController } from '../controllers/formController'
-
-// const router = express.Router()
-
-// // POST /api/udyam/register - Submit Udyam registration
-// router.post('/register', FormController.submitUdyamRegistration)
-
-// // GET /api/udyam/applications - Get all applications
-// router.get('/applications', FormController.getAllApplications)
-
-// // GET /api/udyam/applications/:id - Get application by ID
-// router.get('/applications/:id', FormController.getApplicationById)
-
-// // PUT /api/udyam/applications/:id/status - Update application status
-// router.put('/applications/:id/status', FormController.updateApplicationStatus)
-
-// export { router as formRoutes }
-
 import express from "express";
 import { FormController } from "../controllers/formController";
+import { FormService } from "../services/formService";
 
 const router = express.Router();
 
-// ===== MAIN UDYAM REGISTRATION ROUTES =====
+// MAIN UDYAM REGISTRATION ROUTES
 
 // POST /api/udyam/register - Submit Udyam registration
 router.post("/register", FormController.submitUdyamRegistration);
@@ -60,8 +42,8 @@ router.post("/validate/aadhaar", async (req, res) => {
       });
     }
 
-    // You can use FormService to check duplicates
-    // const exists = await FormService.findByAadhaar(aadhaar)
+    //using FormService to check duplicates
+    const exists = await FormService.findByAadhaar(aadhaar);
 
     res.json({
       success: true,

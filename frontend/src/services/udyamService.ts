@@ -60,7 +60,7 @@ export class UdyamService {
     data: UdyamRegistrationData
   ): Promise<ApiResponse<UdyamApplication>> {
     try {
-      console.log("🚀 UdyamService: Submitting registration data:", data);
+      console.log("UdyamService: Submitting registration data:", data);
 
       // Test connection first
       const connectionTest = await this.testConnection();
@@ -72,11 +72,11 @@ export class UdyamService {
         "/udyam/register",
         data
       );
-      console.log("📝 UdyamService: Backend response:", result);
+      console.log("UdyamService: Backend response:", result);
 
       return result;
     } catch (error) {
-      console.error("❌ UdyamService: Error:", error);
+      console.error("UdyamService: Error:", error);
       return {
         success: false,
         message: error instanceof Error ? error.message : "Registration failed",

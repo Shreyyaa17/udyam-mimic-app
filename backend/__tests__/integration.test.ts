@@ -1,7 +1,7 @@
 import request from "supertest";
 import app from "../src/index";
 
-// ✅ CRITICAL: Mock Prisma BEFORE any imports that use it
+// CRITICAL: Mock Prisma BEFORE any imports that use it
 jest.mock("../src/lib/prisma", () => ({
   prisma: {
     applicants: {
@@ -16,7 +16,7 @@ jest.mock("../src/lib/prisma", () => ({
   },
 }));
 
-// ✅ Mock DatabaseUtils to prevent real DB connections
+// Mock DatabaseUtils to prevent real DB connections
 jest.mock("../src/utils/db", () => ({
   DatabaseUtils: {
     testConnection: jest.fn().mockResolvedValue(true),
@@ -56,10 +56,10 @@ describe("Integration Tests - Complete Udyam Registration Flow", () => {
     test("should complete full registration process successfully", async () => {
       const { prisma } = require("../src/lib/prisma");
 
-      // ✅ FIXED: Mock no existing application first
+      // FIXED: Mock no existing application first
       prisma.applicants.findUnique.mockResolvedValue(null);
 
-      // ✅ FIXED: Mock successful creation
+      // FIXED: Mock successful creation
       const createdApp = {
         id: 1,
         ...validUdyamData,
@@ -80,7 +80,7 @@ describe("Integration Tests - Complete Udyam Registration Flow", () => {
     test("should prevent duplicate registrations", async () => {
       const { prisma } = require("../src/lib/prisma");
 
-      // ✅ FIXED: Mock existing application to trigger duplicate check
+      // FIXED: Mock existing application to trigger duplicate check
       const existingApp = {
         id: 1,
         ...validUdyamData,
@@ -95,7 +95,7 @@ describe("Integration Tests - Complete Udyam Registration Flow", () => {
         .expect(400);
 
       expect(response.body.success).toBe(false);
-      // ✅ FIXED: Expected message matches your controller logic
+      // FIXED: Expected message matches your controller logic
       expect(response.body.message).toBe("Aadhaar number already registered");
     });
 
@@ -121,10 +121,10 @@ describe("Integration Tests - Complete Udyam Registration Flow", () => {
     test("should handle unique constraint violations", async () => {
       const { prisma } = require("../src/lib/prisma");
 
-      // ✅ Mock no existing application in initial check
+      // Mock no existing application in initial check
       prisma.applicants.findUnique.mockResolvedValue(null);
 
-      // ✅ FIXED: Create proper Prisma P2002 error
+      // FIXED: Create proper Prisma P2002 error
       const uniqueError = new Error("Unique constraint failed") as any;
       uniqueError.code = "P2002";
       uniqueError.meta = { target: ["pan"] };
@@ -144,7 +144,7 @@ describe("Integration Tests - Complete Udyam Registration Flow", () => {
     test("should handle database connection errors gracefully", async () => {
       const { prisma } = require("../src/lib/prisma");
 
-      // ✅ FIXED: Create proper PrismaClientInitializationError
+      // FIXED: Create proper PrismaClientInitializationError
       const dbError = new Error("Database connection failed") as any;
       dbError.name = "PrismaClientInitializationError";
 
@@ -164,7 +164,7 @@ describe("Integration Tests - Complete Udyam Registration Flow", () => {
     test("should handle multiple concurrent registrations", async () => {
       const { prisma } = require("../src/lib/prisma");
 
-      // ✅ Mock unique data for each concurrent request
+      // Mock unique data for each concurrent request
       prisma.applicants.findUnique.mockResolvedValue(null);
 
       const promises = [];
@@ -172,13 +172,13 @@ describe("Integration Tests - Complete Udyam Registration Flow", () => {
       for (let i = 0; i < 5; i++) {
         const testData = {
           ...validUdyamData,
-          aadhaar: `12345678901${i}`, // ✅ Unique Aadhaar for each
-          pan: `ABCDE123${i}F`, // ✅ Unique PAN for each
-          mobile: `987654321${i}`, // ✅ Unique mobile for each
+          aadhaar: `12345678901${i}`, // Unique Aadhaar for each
+          pan: `ABCDE123${i}F`, // Unique PAN for each
+          mobile: `987654321${i}`, // Unique mobile for each
           email: `test${i}@example.com`,
         };
 
-        // ✅ Mock successful creation for each
+        // Mock successful creation for each
         prisma.applicants.create.mockResolvedValue({
           id: i + 1,
           ...testData,

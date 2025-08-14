@@ -102,9 +102,8 @@ export class FormService {
     return await prisma.applicants.update({
       where: { id },
       data: {
-        // Add status field if it exists in your Prisma schema
+        // if status exists in Prisma schema
         // status: status,
-        // For now, just update a field that exists
       },
     });
   }
@@ -136,7 +135,7 @@ export class FormService {
     // Additional useful statistics
     const recentApplications = await prisma.applicants.count({
       where: {
-        // If you have created_at field, uncomment this:
+        // If created_at field exists, uncomment this:
         // created_at: {
         //   gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000), // Last 30 days
         // },
@@ -217,7 +216,7 @@ export class FormService {
   static async getApplicationsByDateRange(startDate: Date, endDate: Date) {
     return await prisma.applicants.findMany({
       where: {
-        // Uncomment if you have created_at field:
+        // Uncomment if created_at field exists:
         // created_at: {
         //   gte: startDate,
         //   lte: endDate,

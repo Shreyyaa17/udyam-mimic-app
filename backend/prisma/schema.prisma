@@ -32,5 +32,5 @@ model applicants {
   bank_account          String
   ifsc                  String
   created_at            DateTime @default(now())
-  updated_at            DateTime @default(now()) @updatedAt  // ✅ Added default value
+  updated_at            DateTime @default(now()) @updatedAt  // Added default value
 }

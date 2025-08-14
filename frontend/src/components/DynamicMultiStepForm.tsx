@@ -101,12 +101,12 @@ export default function DynamicMultiStepForm() {
     setIsSubmitting(true);
     
     try {
-      console.log("🔍 Original form data:", data);
+      console.log("Original form data:", data);
       
       // Validate all fields before submission
       const isValid = await trigger();
       if (!isValid) {
-        console.error("❌ Form validation failed");
+        console.error("Form validation failed");
         setIsSubmitting(false);
         return;
       }
@@ -119,12 +119,12 @@ export default function DynamicMultiStepForm() {
         physically_handicapped: data.physically_handicapped === "yes" || data.physically_handicapped === true
       };
       
-      console.log("🔄 Transformed data for backend:", transformedData);
+      console.log("Transformed data for backend:", transformedData);
       
       // Submit to backend
       const result = await UdyamService.submitRegistration(transformedData as UdyamRegistrationData);
       
-      console.log("📡 Backend response:", result);
+      console.log("Backend response:", result);
       
       if (result.success) {
         setSubmissionResult({
@@ -152,7 +152,7 @@ export default function DynamicMultiStepForm() {
         }
       }
     } catch (error) {
-      console.error("❌ Submission error:", error);
+      console.error("Submission error:", error);
       setSubmissionResult({
         success: false,
         message: "Network error occurred. Please check your connection and try again."
@@ -228,7 +228,6 @@ export default function DynamicMultiStepForm() {
       <div style={styles.container}>
         <div style={styles.formWrapper}>
           <div style={{ color: "#fff", fontSize: "1.2rem" }}>
-            <div style={{ marginBottom: 16 }}>⏳</div>
             Loading Udyam Registration Form...
           </div>
         </div>
@@ -247,7 +246,6 @@ export default function DynamicMultiStepForm() {
               marginBottom: 20,
               color: submissionResult.success ? "#4caf50" : "#ff4444"
             }}>
-              {submissionResult.success ? "✅" : "❌"}
             </div>
             
             <h2 style={{ 

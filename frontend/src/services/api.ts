@@ -17,7 +17,7 @@ export class ApiService {
   ): Promise<ApiResponse<T>> {
     try {
       const url = `${API_BASE_URL}${endpoint}`;
-      console.log("🌐 Making request to:", url);
+      console.log("Making request to:", url);
 
       const config: RequestInit = {
         headers: {
@@ -27,13 +27,13 @@ export class ApiService {
         ...options,
       };
 
-      console.log("📤 Request config:", config);
+      console.log("Request config:", config);
 
       const response = await fetch(url, config);
-      console.log("📥 Response status:", response.status);
+      console.log("Response status:", response.status);
 
       const data = await response.json();
-      console.log("📥 Response data:", data);
+      console.log("Response data:", data);
 
       if (!response.ok) {
         throw new Error(
@@ -43,7 +43,7 @@ export class ApiService {
 
       return data;
     } catch (error) {
-      console.error("🚨 API request failed:", error);
+      console.error("API request failed:", error);
 
       // Check if it's a network error
       if (error instanceof TypeError && error.message.includes("fetch")) {
