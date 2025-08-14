@@ -130,21 +130,21 @@ npm (v8.0.0 or higher)
 PostgreSQL (v12 or higher)  
 Git
 
-### Clone the repository
+#### Clone the repository
 
 ```
 git clone https://github.com/Shreyyaa17/udyam-mimic-app.git
 cd udyam-registration-system
 ```
 
-### Install backend dependencies
+#### Install backend dependencies
 
 ```
 cd backend
 npm install
 ```
 
-### Install frontend dependencies
+#### Install frontend dependencies
 
 ```
 cd ../frontend
@@ -175,26 +175,26 @@ NEXT_PUBLIC_APP_NAME=Udyam Registration Portal
 
 ## Database Setup
 
-### Create PostgreSQL Database
+#### Create PostgreSQL Database
 
 ```
 createdb myprojectdb
 ```
 
-### Generate Prisma Client
+#### Generate Prisma Client
 
 ```
 cd backend
 npx prisma generate
 ```
 
-### Push Database Schema
+#### Push Database Schema
 
 ```
 npx prisma db push
 ```
 
-### Optional: Open Prisma Studio
+#### Optional: Open Prisma Studio
 
 ```
 npx prisma studio
@@ -202,29 +202,29 @@ npx prisma studio
 
 ## Running the Application
 
-### Development Mode
+## Development Mode
 
-### Start Backend
+#### Start Backend
 
 ```
 cd backend
 npm run dev
 ```
 
-### Server runs on: http://localhost:4000
+#### Server runs on: http://localhost:4000
 
-### Start Frontend in new terminal
+#### Start Frontend in new terminal
 
 ```
 cd frontend
 npm run dev
 ```
 
-### App runs on: http://localhost:3000
+#### App runs on: http://localhost:3000
 
 ## Production Mode
 
-### Build & Start Backend
+#### Build & Start Backend
 
 ```
 cd backend
@@ -232,7 +232,7 @@ npm run build
 npm start
 ```
 
-### Build & Start Frontend
+#### Build & Start Frontend
 
 ```
 cd frontend
@@ -246,13 +246,13 @@ npm start
 cd backend
 ```
 
-### Run all tests
+#### Run all tests
 
 ```
 npm test
 ```
 
-### Run specific test suites
+#### Run specific test suites
 
 ```
 npm run test:basic
@@ -261,13 +261,13 @@ npm run test:api
 npm run test:integration
 ```
 
-### Run with coverage
+#### Run with coverage
 
 ```
 npm run test:coverage
 ```
 
-### Run in watch mode
+#### Run in watch mode
 
 ```
 npm run test:watch
@@ -290,4 +290,4 @@ PAN numbers must be unique across all registrations
 Mobile numbers must follow Indian numbering standards  
 All fields are required for successful registration
 
-#### Deployment
+## Deployment
