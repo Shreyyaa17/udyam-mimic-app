@@ -132,109 +132,145 @@ Git
 
 ### Clone the repository
 
+```
 git clone https://github.com/Shreyyaa17/udyam-mimic-app.git
 cd udyam-registration-system
+```
 
 ### Install backend dependencies
 
+```
 cd backend
 npm install
+```
 
 ### Install frontend dependencies
 
+```
 cd ../frontend
 npm install
+```
 
 ## Environment Setup
 
 ### Backend Environment
 
-Create backend/.env:  
-DATABASE_URL="postgresql://postgres:yourpassword@localhost:5432/myprojectdb"  
-PORT=4000  
-NODE_ENV=development  
+Create backend/.env:
+
+```
+DATABASE_URL="postgresql://postgres:yourpassword@localhost:5432/myprojectdb"
+PORT=4000
+NODE_ENV=development
 FRONTEND_URL=http://localhost:3000
+```
 
 ### Frontend Environment
 
-Create frontend/.env.local:  
-NEXT_PUBLIC_API_URL=http://localhost:4000/api  
+Create frontend/.env.local:
+
+```
+NEXT_PUBLIC_API_URL=http://localhost:4000/api
 NEXT_PUBLIC_APP_NAME=Udyam Registration Portal
+```
 
 ## Database Setup
 
 ### Create PostgreSQL Database
 
+```
 createdb myprojectdb
+```
 
 ### Generate Prisma Client
 
+```
 cd backend
 npx prisma generate
+```
 
 ### Push Database Schema
 
+```
 npx prisma db push
+```
 
 ### Optional: Open Prisma Studio
 
+```
 npx prisma studio
+```
 
-Running the Application
-Development Mode
+## Running the Application
+
+### Development Mode
 
 ### Start Backend
 
+```
 cd backend
 npm run dev
+```
 
 ### Server runs on: http://localhost:4000
 
 ### Start Frontend in new terminal
 
+```
 cd frontend
 npm run dev
+```
 
 ### App runs on: http://localhost:3000
 
-Production Mode
+## Production Mode
 
 ### Build & Start Backend
 
+```
 cd backend
 npm run build
 npm start
+```
 
 ### Build & Start Frontend
 
+```
 cd frontend
 npm run build
 npm start
+```
 
 ## Testing
 
+```
 cd backend
+```
 
 ### Run all tests
 
+```
 npm test
+```
 
 ### Run specific test suites
 
+```
 npm run test:basic
 npm run test:validation
 npm run test:api
 npm run test:integration
+```
 
 ### Run with coverage
 
+```
 npm run test:coverage
+```
 
 ### Run in watch mode
 
 ```
 npm run test:watch
-
 ```
 
 ## Validation Rules
@@ -254,4 +290,4 @@ PAN numbers must be unique across all registrations
 Mobile numbers must follow Indian numbering standards  
 All fields are required for successful registration
 
-## Deployment
+#### Deployment
