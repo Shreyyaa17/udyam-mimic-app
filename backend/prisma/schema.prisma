@@ -31,6 +31,15 @@ model applicants {
   plant_location        String
   bank_account          String
   ifsc                  String
+
+  // Add consent fields
+  consent_step1         Boolean  @default(false)
+  consent_step2         Boolean  @default(false)
+  consent_step3         Boolean  @default(false)
+  consent_step4         Boolean  @default(false)
+  consent_step5         Boolean  @default(false)
+  consent_step6         Boolean  @default(false)
+
   created_at            DateTime @default(now())
   updated_at            DateTime @default(now()) @updatedAt  // Added default value
 }
