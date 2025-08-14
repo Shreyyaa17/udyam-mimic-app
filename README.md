@@ -17,7 +17,6 @@ A comprehensive MSME (Micro, Small & Medium Enterprises) Registration Portal clo
 - [Running the Application](#running-the-application)
 - [Testing](#testing)
 - [Validation Rules](#validation-rules)
-- [Deployment](#deployment)
 
 ---
 
@@ -290,7 +289,3 @@ Field Validation Patterns:
 - PAN numbers must be unique across all registrations
 - Mobile numbers must follow Indian numbering standards
 - All fields are required for successful registration
-
-## Deployment
-
-- Live app url:
