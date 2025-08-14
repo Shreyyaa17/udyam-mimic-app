@@ -275,19 +275,20 @@ npm run test:watch
 
 ## Validation Rules
 
-Field Validation Patterns:  
-Aadhaar: 12-digit numeric format  
-PAN: ABCDE1234F (5 letters + 4 digits + 1 letter)  
-Mobile: Indian mobile numbers starting with 6, 7, 8, or 9  
-IFSC: Bank IFSC code format (e.g., SBIN0001234)  
-Email: Standard email validation  
-Pincode: 6-digit numeric format
+Field Validation Patterns:
+
+- Aadhaar: 12-digit numeric format
+- PAN: ABCDE1234F (5 letters + 4 digits + 1 letter)
+- Mobile: Indian mobile numbers starting with 6, 7, 8, or 9
+- IFSC: Bank IFSC code format (e.g., SBIN0001234)
+- Email: Standard email validation
+- Pincode: 6-digit numeric format
 
 ## Business Rules
 
-Aadhaar numbers must be unique across all registrations  
-PAN numbers must be unique across all registrations  
-Mobile numbers must follow Indian numbering standards  
-All fields are required for successful registration
+- Aadhaar numbers must be unique across all registrations
+- PAN numbers must be unique across all registrations
+- Mobile numbers must follow Indian numbering standards
+- All fields are required for successful registration
 
 ## Deployment
