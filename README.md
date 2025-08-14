@@ -232,11 +232,11 @@ npm run test:coverage
 
 ### Run in watch mode
 
-npm run test:watch
+`npm run test:watch`
 
 ## Validation Rules
 
-Field Validation Patterns  
+Field Validation Patterns:  
 Aadhaar: 12-digit numeric format  
 PAN: ABCDE1234F (5 letters + 4 digits + 1 letter)  
 Mobile: Indian mobile numbers starting with 6, 7, 8, or 9  
