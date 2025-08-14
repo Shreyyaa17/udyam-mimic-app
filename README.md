@@ -232,7 +232,8 @@ npm run test:coverage
 
 ### Run in watch mode
 
-```npm run test:watch
+```
+npm run test:watch
 
 ```
 
