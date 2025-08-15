@@ -1,4 +1,4 @@
-import prisma from "../lib/prisma"; // Changed from { prisma }
+import prisma from "../lib/prisma";
 import { UdyamRegistrationData } from "../validations/formValidation";
 
 export class FormService {
