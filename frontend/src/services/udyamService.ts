@@ -22,6 +22,13 @@ export interface UdyamRegistrationData {
   plant_location: string;
   bank_account: string;
   ifsc: string;
+  // Add consent fields for your deployment
+  consent_step1: boolean;
+  consent_step2: boolean;
+  consent_step3: boolean;
+  consent_step4: boolean;
+  consent_step5: boolean;
+  consent_step6: boolean;
 }
 
 export interface UdyamApplication extends UdyamRegistrationData {
@@ -30,10 +37,20 @@ export interface UdyamApplication extends UdyamRegistrationData {
 }
 
 export class UdyamService {
+  // Get API base URL from environment or fallback
+  private static getApiUrl(): string {
+    return (
+      process.env.NEXT_PUBLIC_API_URL ||
+      "https://udyam-backend-k0ju.onrender.com/api"
+    );
+  }
+
   // Test backend connection
   static async testConnection(): Promise<ApiResponse> {
     try {
-      const response = await fetch("http://localhost:4000/health");
+      const apiUrl = this.getApiUrl().replace("/api", ""); // Remove /api for health endpoint
+      const response = await fetch(`${apiUrl}/health`);
+
       if (response.ok) {
         const data = await response.json();
         return {
@@ -48,10 +65,10 @@ export class UdyamService {
         };
       }
     } catch (error) {
+      console.error("Connection test error:", error);
       return {
         success: false,
-        message:
-          "Cannot connect to backend. Ensure server is running on http://localhost:4000",
+        message: "Cannot connect to backend. Please check your connection.",
       };
     }
   }
@@ -92,5 +109,33 @@ export class UdyamService {
     id: number
   ): Promise<ApiResponse<UdyamApplication>> {
     return ApiService.get<UdyamApplication>(`/udyam/applications/${id}`);
+  }
+
+  // Additional utility method for deployment testing
+  static async testApiEndpoint(): Promise<ApiResponse> {
+    try {
+      const apiUrl = this.getApiUrl();
+      const response = await fetch(`${apiUrl}/test`);
+
+      if (response.ok) {
+        const data = await response.json();
+        return {
+          success: true,
+          data,
+          message: "API endpoint test successful",
+        };
+      } else {
+        return {
+          success: false,
+          message: `API test failed with status: ${response.status}`,
+        };
+      }
+    } catch (error) {
+      console.error("API test error:", error);
+      return {
+        success: false,
+        message: "Cannot reach API endpoint",
+      };
+    }
   }
 }
