@@ -155,7 +155,7 @@ app.use(
 );
 
 // 404 handler
-app.use((req: express.Request, res: express.Response) => {
+app.use("*", (req: express.Request, res: express.Response) => {
   res.status(404).json({
     success: false,
     message: "Route not found",
