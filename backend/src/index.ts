@@ -42,7 +42,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Handle preflight requests explicitly
-app.options("*", cors(corsOptions));
+app.options("/*catchall", cors(corsOptions));
 
 // Add explicit headers as backup
 app.use((req, res, next) => {
