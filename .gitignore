@@ -240,7 +240,6 @@ local.json
 .prisma-studio
 
 # TypeScript compiled output
-lib/
 types/
 
 # Package manager files - KEEP THESE FOR DEPLOYMENT!
