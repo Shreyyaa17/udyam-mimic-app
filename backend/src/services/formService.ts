@@ -1,4 +1,4 @@
-import { prisma } from "../lib/prisma";
+import prisma from "../lib/prisma"; // Changed from { prisma }
 import { UdyamRegistrationData } from "../validations/formValidation";
 
 export class FormService {
@@ -154,19 +154,19 @@ export class FormService {
 
     return {
       total,
-      byState: byState.map((item) => ({
+      byState: byState.map((item: any) => ({
         state: item.state,
         count: item._count,
       })),
-      byOrgType: byOrgType.map((item) => ({
+      byOrgType: byOrgType.map((item: any) => ({
         organisation_type: item.organisation_type,
         count: item._count,
       })),
-      bySocialCategory: bySocialCategory.map((item) => ({
+      bySocialCategory: bySocialCategory.map((item: any) => ({
         social_category: item.social_category,
         count: item._count,
       })),
-      byGender: byGender.map((item) => ({
+      byGender: byGender.map((item: any) => ({
         gender: item.gender,
         count: item._count,
       })),

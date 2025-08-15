@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import express from "express"; // Add this import
 import { udyamRegistrationSchema } from "../validations/formValidation";
 import { FormService } from "../services/formService";
 
@@ -364,5 +365,14 @@ export class FormController {
           process.env.NODE_ENV === "development" ? error.message : undefined,
       });
     }
+  }
+
+  // Add these methods if you have functions with 'app' parameters (these might be in a different part of your file)
+  static setupRoutes(app: express.Application) {
+    // Your route setup code if it exists
+  }
+
+  static configureMiddleware(app: express.Application) {
+    // Your middleware setup code if it exists
   }
 }
