@@ -7,8 +7,9 @@ import { DatabaseUtils } from "./utils/db";
 dotenv.config();
 
 const app = express();
+const PORT: number = parseInt(process.env.PORT || "4000", 10);
 
-// CRITICAL FIX: Explicit CORS configuration
+// CORS configuration with proper TypeScript types
 const allowedOrigins = [
   "https://udyam-frontend.onrender.com/",
   "http://localhost:3000",
@@ -16,7 +17,10 @@ const allowedOrigins = [
 ];
 
 const corsOptions = {
-  origin: function (origin: string | undefined, callback: Function) {
+  origin: function (
+    origin: string | undefined,
+    callback: (err: Error | null, allow?: boolean) => void
+  ) {
     // Allow requests with no origin (mobile apps, Postman, etc.)
     if (!origin) {
       return callback(null, true);
@@ -43,7 +47,7 @@ app.options("*", cors(corsOptions));
 // Add explicit headers as backup
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
+  if (origin && allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   }
   res.setHeader(
@@ -60,6 +64,15 @@ app.use((req, res, next) => {
     return res.sendStatus(200);
   }
 
+  next();
+});
+
+// Security headers for production
+app.use((req, res, next) => {
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "DENY");
+  res.setHeader("X-XSS-Protection", "1; mode=block");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
   next();
 });
 
