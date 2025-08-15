@@ -143,10 +143,11 @@ export default function DynamicMultiStepForm() {
       
       if (result.success) {
         setSubmissionResult({
-          success: true,
-          message: result.message || "Registration submitted successfully!",
-          udyam_id: result.udyam_id
-        });
+        success: true,
+        message: result.message || "Registration submitted successfully!",
+        udyam_id: result.data?.udyam_id 
+      });
+
         
         // Reset form after successful submission
         reset();
