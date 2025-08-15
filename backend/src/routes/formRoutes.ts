@@ -42,13 +42,14 @@ router.post("/validate/aadhaar", async (req, res) => {
       });
     }
 
-    //using FormService to check duplicates
     const exists = await FormService.findByAadhaar(aadhaar);
 
     res.json({
       success: true,
-      available: true, // Change based on actual check
-      message: "Aadhaar is available for registration",
+      available: !exists,
+      message: exists
+        ? "Aadhaar already registered"
+        : "Aadhaar is available for registration",
     });
   } catch (error) {
     res.status(500).json({
@@ -69,10 +70,14 @@ router.post("/validate/pan", async (req, res) => {
       });
     }
 
+    const exists = await FormService.checkDuplicateByPAN(pan);
+
     res.json({
       success: true,
-      available: true, // Change based on actual check
-      message: "PAN is available for registration",
+      available: !exists,
+      message: exists
+        ? "PAN already registered"
+        : "PAN is available for registration",
     });
   } catch (error) {
     res.status(500).json({
@@ -92,12 +97,15 @@ router.get("/by-state/:state", async (req, res) => {
     const limit = parseInt(req.query.limit as string) || 10;
     const offset = (page - 1) * limit;
 
-    // Use FormService method if available
-    // const applications = await FormService.getApplicationsByState(state, offset, limit)
+    const applications = await FormService.getApplicationsByState(
+      state,
+      offset,
+      limit
+    );
 
     res.json({
       success: true,
-      data: [], // Replace with actual data
+      data: applications,
       pagination: {
         current_page: page,
         per_page: limit,
@@ -120,9 +128,15 @@ router.get("/by-org-type/:type", async (req, res) => {
     const limit = parseInt(req.query.limit as string) || 10;
     const offset = (page - 1) * limit;
 
+    const applications = await FormService.getApplicationsByOrgType(
+      type,
+      offset,
+      limit
+    );
+
     res.json({
       success: true,
-      data: [], // Replace with actual data from FormService
+      data: applications,
       pagination: {
         current_page: page,
         per_page: limit,
@@ -143,18 +157,23 @@ router.get("/by-org-type/:type", async (req, res) => {
 router.get("/export", async (req, res) => {
   try {
     const format = (req.query.format as string) || "json";
+    const applications = await FormService.getAllApplications();
 
     if (format === "csv") {
-      // Set CSV headers
       res.setHeader("Content-Type", "text/csv");
       res.setHeader(
         "Content-Disposition",
         "attachment; filename=udyam-applications.csv"
       );
-      // Implement CSV export logic here
-      res.send("CSV data would go here");
+      // Basic CSV conversion
+      const csvData = applications
+        .map(
+          (app) =>
+            `${app.id},${app.enterprise_name},${app.entrepreneur_name},${app.state}`
+        )
+        .join("\n");
+      res.send(`ID,Enterprise Name,Entrepreneur Name,State\n${csvData}`);
     } else {
-      // JSON export
       res.setHeader("Content-Type", "application/json");
       res.setHeader(
         "Content-Disposition",
@@ -162,7 +181,7 @@ router.get("/export", async (req, res) => {
       );
       res.json({
         success: true,
-        data: [], // Replace with actual data
+        data: applications,
         exported_at: new Date().toISOString(),
       });
     }
