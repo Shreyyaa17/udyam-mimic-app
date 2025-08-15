@@ -243,10 +243,11 @@ local.json
 lib/
 types/
 
-# Package manager files
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
+# Package manager files - KEEP THESE FOR DEPLOYMENT!
+# NOTE: package-lock.json should be committed for consistent deployments
+# package-lock.json  <-- COMMENTED OUT
+yarn.lock             # Only ignore yarn.lock if using npm
+pnpm-lock.yaml        # Only ignore pnpm if using npm
 
 # Development SSL certificates
 *.local.pem
