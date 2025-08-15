@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { prisma } from "../lib/prisma";
 import { udyamRegistrationSchema } from "../validations/formValidation";
 import { FormService } from "../services/formService";
 
