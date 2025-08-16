@@ -91,6 +91,21 @@ if (process.env.NODE_ENV !== "production") {
 // API Routes
 app.use("/api/udyam", formRoutes);
 
+app.get("/", (req, res) => {
+  res.json({
+    message: "Udyam Registration API Server",
+    status: "Running",
+    endpoints: {
+      health: "/health",
+      api_test: "/api/test",
+      registration: "/api/udyam/register",
+      applications: "/api/udyam/applications",
+    },
+    documentation:
+      "This is a backend API server for the Udyam Registration System",
+  });
+});
+
 // Health check endpoint with enhanced information
 app.get("/health", async (req, res) => {
   try {
