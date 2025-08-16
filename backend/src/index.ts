@@ -11,7 +11,7 @@ const PORT: number = parseInt(process.env.PORT || "4000", 10);
 
 // CORS configuration with proper TypeScript types
 const allowedOrigins = [
-  "https://udyam-frontend.onrender.com/",
+  "https://udyam-frontend.onrender.com",
   "http://localhost:3000",
   "http://localhost:3001",
   "http://127.0.0.1:3000",
