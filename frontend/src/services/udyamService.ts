@@ -86,7 +86,7 @@ export class UdyamService {
       }
 
       const result = await ApiService.post<UdyamApplication>(
-        "api/udyam/register",
+        "/api/udyam/register",
         data
       );
       console.log("UdyamService: Backend response:", result);
