@@ -22,7 +22,7 @@ export class FormService {
 
   static async getAllApplications(offset: number = 0, limit: number = 10) {
     return await prisma.applicants.findMany({
-      skip: offset,
+      skip: offset * limit,
       take: limit,
       orderBy: { id: "desc" },
     });
